@@ -749,7 +749,6 @@
     "columns": {
       "prompt": "text"
     }
-  }
   },
   "semi_cp_text_2":{
     "hf_hub_url": "Non-hallucination/cp_en_dataset_textbook_v1",
