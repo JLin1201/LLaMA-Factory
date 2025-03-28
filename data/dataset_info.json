@@ -232,7 +232,6 @@
   "ultrachat_200k": {
     "hf_hub_url": "HuggingFaceH4/ultrachat_200k",
     "ms_hub_url": "AI-ModelScope/ultrachat_200k",
-    "split": "train_sft",
     "formatting": "sharegpt",
     "columns": {
       "messages": "messages"
@@ -320,36 +319,18 @@
     }
   },
   "open_thoughts": {
-    "hf_hub_url": "llamafactory/OpenThoughts-114k",
+    "hf_hub_url": "open-thoughts/OpenThoughts-114k",
     "formatting": "sharegpt",
     "columns": {
-      "messages": "messages"
+      "messages": "conversations",
+      "system": "system"
     },
     "tags": {
-      "role_tag": "role",
-      "content_tag": "content",
+      "role_tag": "from",
+      "content_tag": "value",
       "user_tag": "user",
-      "assistant_tag": "assistant",
-      "system_tag": "system"
+      "assistant_tag": "assistant"
     }
-  },
-  "open_r1_math": {
-    "hf_hub_url": "llamafactory/OpenR1-Math-94k",
-    "formatting": "sharegpt",
-    "columns": {
-      "messages": "messages"
-    },
-    "tags": {
-      "role_tag": "role",
-      "content_tag": "content",
-      "user_tag": "user",
-      "assistant_tag": "assistant",
-      "system_tag": "system"
-    }
-  },
-  "chinese_r1_distill": {
-    "hf_hub_url": "Congliu/Chinese-DeepSeek-R1-Distill-data-110k-SFT",
-    "ms_hub_url": "liucong/Chinese-DeepSeek-R1-Distill-data-110k-SFT"
   },
   "llava_1k_en": {
     "hf_hub_url": "BUAADreamer/llava-en-zh-2k",
@@ -679,5 +660,122 @@
       "prompt": "content"
     },
     "folder": "python"
+  },
+  "openai_gsm8k": {
+    "hf_hub_url": "openai/gsm8k",
+    "folder": "main",
+    "split": "train",
+    "columns": {
+      "prompt": "question",
+      "response": "answer"
+    },
+    "num_samples": null
+  },
+  "reject_set": {
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/no_answer_dataset_varied_300.json",
+    "columns": {
+      "prompt": "prompt",
+      "response": "response"
+    }
+  },
+  "semi": {
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/qa_semi_conductor.json",
+    "columns": {
+      "query": "instruction",
+      "response": "output"
+    }
+  },
+  "semi2": {
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/datasets_qa_dataset.json",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
+  "semi3": {
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/dataset_qa_dataset_2600.json",
+    "columns": {
+      "prompt": "instrucion",
+      "response": "output"
+    }
+  },
+  "RL_5000": {
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/dataset_RLqa_dataset_5000.json",
+    "columns": {
+      "query": "query",
+      "response": "chosen"
+    }
+  },
+  "RL_pair_semi":{
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/RL_5000.json",
+    "ranking": true,
+    "columns": {
+      "query": "question",
+      "chosen": "chosen",
+      "rejected": "reject"
+    }
+  },
+  "Med_int_data":{
+    "hf_hub_url": "huzaifa525/Medical_Intelligence_Dataset_40k_Rows_of_Disease_Info_Treatments_and_Medical_QA",
+    "columns": {
+      "prompt": "input",
+      "response": "output"
+    }
+  },
+  "MedQA":{
+    "hf_hub_url": "lavita/medical-qa-datasets",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    },
+    "folder": "all-processed"
+  },
+  "MedQA2":{
+    "hf_hub_url": "keivalya/MedQuad-MedicalQnADataset",
+    "columns": {
+      "query": "Question",
+      "response": "Answer"
+    }
+  },
+  "semi_cp":{
+    "hf_hub_url": "Non-hallucination/cp_en_dataset_8639",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "semi_cp_text":{
+    "hf_hub_url": "Non-hallucination/cp_en_dataset_textbook",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "Classifer_7398":{
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/classifier/fine_tune_dataset_classifier.jsonl",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
+  "Classifer_7398_COT":{
+    "file_name": "/home/u5695828/Non-hallucinate/datasets/classifier/fine_tune_dataset_classifier_COT_formatted.jsonl",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
+  "semi_cp_text_2":{
+    "hf_hub_url": "Non-hallucination/cp_en_dataset_textbook_v1",
+    "columns": {
+      "prompt": "Text"
+    }
+  },
+  "semi_cp_paper_v0":{
+    "hf_hub_url": "Non-hallucination/cp_en_dataset_paper_v0",
+    "columns": {
+      "prompt": "Text"
+    }
   }
 }
