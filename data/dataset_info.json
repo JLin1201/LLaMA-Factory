@@ -749,22 +749,7 @@
     "columns": {
       "prompt": "text"
     }
-  },
-  "Classifer_7398":{
-    "file_name": "/home/u5695828/Non-hallucinate/datasets/classifier/fine_tune_dataset_classifier.jsonl",
-    "columns": {
-      "prompt": "instruction",
-      "query": "input",
-      "response": "output"
-    }
-  },
-  "Classifer_7398_COT":{
-    "file_name": "/home/u5695828/Non-hallucinate/datasets/classifier/fine_tune_dataset_classifier_COT_formatted.jsonl",
-    "columns": {
-      "prompt": "instruction",
-      "query": "input",
-      "response": "output"
-    }
+  }
   },
   "semi_cp_text_2":{
     "hf_hub_url": "Non-hallucination/cp_en_dataset_textbook_v1",
