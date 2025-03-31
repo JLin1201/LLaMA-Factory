@@ -32,12 +32,6 @@ while True:
 
         response_content = chat_completion.choices[0].message.content
 
-        # Append response to output JSON
-        responses_json["responses"].append({
-            "question": question,
-            "answer": response_content
-        })
-
         print(f"Response: {response_content}")
 
     except Exception as e:
