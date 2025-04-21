@@ -1,4 +1,4 @@
-# Copyright 2025 HuggingFace Inc. and the LlamaFactory team.
+# Copyright 2024 HuggingFace Inc. and the LlamaFactory team.
 #
 # This code is inspired by the HuggingFace's transformers library.
 # https://github.com/huggingface/transformers/blob/v4.40.0/examples/pytorch/language-modeling/run_clm.py
@@ -16,7 +16,7 @@
 # limitations under the License.
 
 import math
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 from transformers import DataCollatorForLanguageModeling
 
@@ -38,7 +38,7 @@ def run_pt(
     data_args: "DataArguments",
     training_args: "Seq2SeqTrainingArguments",
     finetuning_args: "FinetuningArguments",
-    callbacks: Optional[list["TrainerCallback"]] = None,
+    callbacks: Optional[List["TrainerCallback"]] = None,
 ):
     tokenizer_module = load_tokenizer(model_args)
     tokenizer = tokenizer_module["tokenizer"]
@@ -66,19 +66,25 @@ def run_pt(
         trainer.save_metrics("train", train_result.metrics)
         trainer.save_state()
         if trainer.is_world_process_zero() and finetuning_args.plot_loss:
-            plot_loss(training_args.output_dir, keys=["loss", "eval_loss"])
+            plot_loss(training_args.output_dir)
 
     # Evaluation
     if training_args.do_eval:
         metrics = trainer.evaluate(metric_key_prefix="eval")
-        try:
-            perplexity = math.exp(metrics["eval_loss"])
-        except OverflowError:
-            perplexity = float("inf")
 
-        metrics["perplexity"] = perplexity
+        eval_loss_key = next((k for k in metrics if "eval_loss" in k), None)
+        if eval_loss_key:
+            try:
+                perplexity = math.exp(metrics[eval_loss_key])
+            except OverflowError:
+                perplexity = float("inf")
+            metrics["perplexity"] = perplexity
+        else:
+            print("Warning: 'eval_loss' not found in metrics. Skipping perplexity calculation.")
+
         trainer.log_metrics("eval", metrics)
         trainer.save_metrics("eval", metrics)
+
 
     # Create model card
     create_modelcard_and_push(trainer, model_args, data_args, training_args, finetuning_args)
