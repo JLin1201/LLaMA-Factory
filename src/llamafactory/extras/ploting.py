@@ -98,10 +98,12 @@ def plot_loss(save_dictionary: str, keys: List[str] = None) -> None:
 
     for key in keys:
         steps, metrics = [], []
-        for log in log_history:
-            if key in log:
-                steps.append(log.get("step", log.get("current_steps", len(steps))))
-                metrics.append(log[key])
+        for entry in data["log_history"]:
+            if key in entry:
+                step = entry.get("step", entry.get("current_steps"))
+                if step is not None:
+                    steps.append(step)
+                    metrics.append(entry[key])
 
         if not metrics:
             logger.warning_rank0(f"No metric {key} to plot.")
